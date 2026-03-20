@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Marketing Funnel — Rujukan Peribadi</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f9f8f5;
+    --bg2: #ffffff;
+    --bg3: #f2f0eb;
+    --border: rgba(0,0,0,0.08);
+    --border2: rgba(0,0,0,0.15);
+    --text: #1a1915;
+    --muted: #6b6860;
+    --faint: #d4d1c9;
+    --accent: #c96442;
+    --accent2: #c96442;
+    --gold: #a0620a;
+    --teal: #0d7f6e;
+    --coral: #c94040;
+    --green: #2a7a3b;
+    --blue: #1a5fa8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(249,248,245,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; gap: 0;
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 17px; color: var(--text);
+    padding: 1rem 0; margin-right: 2rem;
+    white-space: nowrap;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-tabs { display: flex; gap: 0; flex: 1; overflow-x: auto; scrollbar-width: none; }
+  .nav-tabs::-webkit-scrollbar { display: none; }
+  .nav-tab {
+    padding: 1rem 1.1rem; font-size: 13px; font-weight: 500;
+    color: var(--muted); background: none; border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer; transition: all .2s; white-space: nowrap;
+  }
+  .nav-tab:hover { color: var(--text); }
+  .nav-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* PAGES */
+  .page { display: none; animation: fadeIn .3s ease; }
+  .page.active { display: block; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
+
+  /* HERO */
+  .hero {
+    padding: 5rem 2rem 3rem;
+    max-width: 900px; margin: 0 auto;
+    text-align: center;
+  }
+  .hero-eyebrow {
+    display: inline-block; font-size: 11px; font-weight: 600;
+    letter-spacing: .15em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 1.25rem;
+    background: rgba(201,100,66,0.08); padding: 5px 14px;
+    border-radius: 20px; border: 1px solid rgba(201,100,66,0.2);
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    line-height: 1.15; margin-bottom: 1.25rem;
+    color: var(--text);
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero p { font-size: 16px; color: var(--muted); max-width: 600px; margin: 0 auto 2rem; }
+  .hero-cards {
+    display: grid; grid-template-columns: repeat(3,1fr); gap: 12px;
+    max-width: 700px; margin: 0 auto;
+  }
+  .hero-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.1rem;
+    text-align: left; cursor: pointer;
+    transition: border-color .2s, transform .2s;
+  }
+  .hero-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+  .hero-card-icon { font-size: 22px; margin-bottom: 8px; }
+  .hero-card-title { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
+  .hero-card-desc { font-size: 12px; color: var(--muted); }
+
+  /* CONTAINERS */
+  .container { max-width: 1100px; margin: 0 auto; padding: 2rem 2rem 4rem; }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem; color: var(--text);
+    margin-bottom: 0.4rem;
+  }
+  .section-sub { font-size: 14px; color: var(--muted); margin-bottom: 2rem; }
+
+  /* FUNNEL STAGE NAV */
+  .stage-nav {
+    display: flex; gap: 8px; flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+  .stage-btn {
+    padding: 7px 16px; font-size: 13px; font-weight: 500;
+    border-radius: 30px; border: 1px solid var(--border2);
+    background: var(--bg2); color: var(--muted);
+    cursor: pointer; transition: all .2s;
+  }
+  .stage-btn:hover { color: var(--text); border-color: rgba(0,0,0,0.25); }
+  .stage-btn.active { color: #fff; border-color: transparent; }
+
+  /* CARDS */
+  .card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 14px; padding: 1.5rem;
+  }
+  .card-label {
+    font-size: 11px; font-weight: 600; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--muted);
+    margin-bottom: 0.75rem;
+  }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  .grid4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
+
+  /* FLOW STEPS */
+  .flow-step {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 12px 0; border-bottom: 1px solid var(--border);
+  }
+  .flow-step:last-child { border-bottom: none; padding-bottom: 0; }
+  .step-num {
+    width: 26px; height: 26px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; flex-shrink: 0; color: #fff;
+  }
+  .step-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+  .step-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+  /* AUTOMATION ROWS */
+  .auto-row {
+    display: flex; align-items: center; gap: 8px;
+    padding: 9px 0; border-bottom: 1px solid var(--border);
+    font-size: 13px; flex-wrap: wrap;
+  }
+  .auto-row:last-child { border-bottom: none; }
+  .tag {
+    font-size: 11px; font-weight: 600; padding: 3px 9px;
+    border-radius: 5px; white-space: nowrap;
+  }
+  .tag-trigger { background: rgba(26,95,168,0.1); color: var(--blue); }
+  .tag-action { background: rgba(42,122,59,0.1); color: var(--green); }
+  .tag-tool { background: rgba(201,100,66,0.08); color: var(--accent); }
+  .auto-text { color: var(--muted); flex: 1; }
+  .arrow { color: var(--faint); }
+
+  /* TOOL CHIPS */
+  .tool-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--bg3); border: 1px solid var(--border);
+    border-radius: 8px; padding: 5px 11px;
+    font-size: 12px; font-weight: 500; color: var(--text);
+    margin: 3px;
+  }
+  .chip-dot { width: 7px; height: 7px; border-radius: 50%; }
+
+  /* KPI CARDS */
+  .kpi-card {
+    background: var(--bg3); border: 1px solid var(--border);
+    border-radius: 10px; padding: 14px;
+  }
+  .kpi-val { font-size: 22px; font-weight: 700; font-family: 'DM Serif Display', serif; }
+  .kpi-label { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+  /* FUNNEL BAR */
+  .funnel-bar-wrap { margin-bottom: 6px; }
+  .funnel-bar {
+    height: 36px; border-radius: 8px;
+    display: flex; align-items: center;
+    padding: 0 14px; font-size: 13px; font-weight: 600;
+    color: #ffffff;
+    transition: opacity .3s;
+  }
+  .funnel-sub { font-size: 11px; color: var(--muted); padding-left: 4px; margin-top: 2px; margin-bottom: 10px; }
+
+  /* EXPERT SECTION */
+  .expert-tabs {
+    display: flex; gap: 6px; flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+  .expert-tab {
+    padding: 6px 14px; font-size: 12px; font-weight: 600;
+    border-radius: 30px; border: 1px solid var(--border2);
+    background: var(--bg2); color: var(--muted);
+    cursor: pointer; transition: all .2s; white-space: nowrap;
+  }
+  .expert-tab:hover { color: var(--text); }
+  .expert-tab.active { color: #ffffff; }
+
+  .expert-name-big {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem; color: var(--text); margin-bottom: 3px;
+  }
+  .expert-role { font-size: 13px; color: var(--muted); margin-bottom: 1rem; }
+  .expert-quote {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.05rem; font-style: italic;
+    line-height: 1.6; color: var(--accent);
+    border-left: 3px solid var(--accent);
+    padding-left: 16px; margin: 1rem 0;
+  }
+  .framework-tag {
+    display: inline-block; font-size: 11px; font-weight: 600;
+    padding: 4px 10px; border-radius: 6px; margin: 3px 3px 3px 0;
+  }
+
+  .insight-row {
+    display: flex; gap: 10px; padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+  .insight-row:last-child { border-bottom: none; }
+  .insight-key {
+    font-size: 12px; font-weight: 700;
+    min-width: 130px; color: var(--accent);
+  }
+  .insight-val { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+  /* GLOSSARY */
+  .gloss-item {
+    padding: 14px 0; border-bottom: 1px solid var(--border);
+  }
+  .gloss-item:last-child { border-bottom: none; }
+  .gloss-term { font-size: 14px; font-weight: 700; color: var(--gold); margin-bottom: 4px; }
+  .gloss-def { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+  /* CHEATSHEET */
+  .cheat-row {
+    display: grid; grid-template-columns: 180px 1fr 1fr;
+    gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border);
+    align-items: start;
+  }
+  .cheat-row:last-child { border-bottom: none; }
+  .cheat-label { font-size: 13px; font-weight: 600; color: var(--text); }
+  .cheat-val { font-size: 13px; color: var(--muted); }
+
+  /* RESPONSIVE */
+  @media (max-width: 700px) {
+    .hero-cards { grid-template-columns: 1fr; }
+    .grid2, .grid3, .grid4 { grid-template-columns: 1fr; }
+    .cheat-row { grid-template-columns: 1fr; }
+    nav { padding: 0 1rem; }
+    .container { padding: 1.5rem 1rem 3rem; }
+    .hero { padding: 3rem 1rem 2rem; }
+    .expert-quote { font-size: 0.95rem; }
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg3); }
+  ::-webkit-scrollbar-thumb { background: var(--faint); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">DM<span>Funnel</span> Pro</div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="goPage('home')">🏠 Home</button>
+    <button class="nav-tab" onclick="goPage('mystack')">⚙️ My Stack Funnel</button>
+    <button class="nav-tab" onclick="goPage('experts')">🌍 Pakar Dunia</button>
+    <button class="nav-tab" onclick="goPage('cheatsheet')">📋 Cheat Sheet</button>
+    <button class="nav-tab" onclick="goPage('glossary')">📖 Glosari</button>
+  </div>
+</nav>
+
+<!-- ===== HOME ===== -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="hero-eyebrow">Rujukan Peribadi Digital Marketing</div>
+    <h1>Kuasai <em>Funnel</em> Automation dari Pakar Dunia</h1>
+    <p>Satu hub belajar yang menggabungkan framework pakar global dengan tools stack anda sendiri — Brevo, Elementor, Make.com & lebih lagi.</p>
+    <div class="hero-cards">
+      <div class="hero-card" onclick="goPage('mystack')">
+        <div class="hero-card-icon">⚙️</div>
+        <div class="hero-card-title">My Stack Funnel</div>
+        <div class="hero-card-desc">Brevo, Make.com, Elementor, Vibe Coding, Abatablaster</div>
+      </div>
+      <div class="hero-card" onclick="goPage('experts')">
+        <div class="hero-card-icon">🌍</div>
+        <div class="hero-card-title">6 Pakar Dunia</div>
+        <div class="hero-card-desc">Brunson, Deiss, Godin, GaryVee, Patel, Kotler</div>
+      </div>
+      <div class="hero-card" onclick="goPage('cheatsheet')">
+        <div class="hero-card-icon">📋</div>
+        <div class="hero-card-title">Cheat Sheet</div>
+        <div class="hero-card-desc">KPI, automation triggers, dan benchmark rujukan pantas</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" style="padding-top:0">
+    <!-- Quick Funnel Visual -->
+    <div style="max-width:700px;margin:0 auto">
+      <div class="card">
+        <div class="card-label">Funnel Overview — 5 Peringkat Utama</div>
+        <div style="margin-top:4px">
+          <div class="funnel-bar-wrap"><div class="funnel-bar" style="background:#7c6ff7;width:100%">🎯 Awareness — Tarik Perhatian</div><div class="funnel-sub">Traffic → Landing Page → Lead Capture</div></div>
+          <div class="funnel-bar-wrap"><div class="funnel-bar" style="background:#0d7f6e;width:80%">💡 Interest — Nurture & Educate</div><div class="funnel-sub">Email Sequence → Brevo Automation → Abatablaster</div></div>
+          <div class="funnel-bar-wrap"><div class="funnel-bar" style="background:#c96442;width:58%">🔥 Decision — Push ke Sales Page</div><div class="funnel-sub">Hot Lead Segment → Offer Email → Retargeting</div></div>
+          <div class="funnel-bar-wrap"><div class="funnel-bar" style="background:#1a5fa8;width:35%">💳 Purchase — Close Sale</div><div class="funnel-sub">Checkout → Make.com Webhook → Onboarding</div></div>
+          <div class="funnel-bar-wrap"><div class="funnel-bar" style="background:#a0620a;width:18%">🔁 Retention — Jadi Pelanggan Setia</div><div class="funnel-sub">Upsell Sequence → VIP List → Referral</div></div>
+        </div>
+      </div>
+
+      <!-- Golden Rule -->
+      <div style="margin-top:16px;background:linear-gradient(135deg,rgba(201,100,66,0.05),rgba(160,98,10,0.05));border:1px solid rgba(201,100,66,0.15);border-radius:14px;padding:1.4rem">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--gold);margin-bottom:8px;text-transform:uppercase">Prinsip Emas — Ingat Ini Selalu</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div style="font-size:13px;color:var(--muted);padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.06)"><span style="color:var(--text);font-weight:600">Brunson:</span> "Bisnes yang boleh spend paling banyak acquire customer — menang."</div>
+          <div style="font-size:13px;color:var(--muted);padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.06)"><span style="color:var(--text);font-weight:600">Deiss:</span> "Funnel adalah sistem tukar stranger jadi super fan."</div>
+          <div style="font-size:13px;color:var(--muted);padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.06)"><span style="color:var(--text);font-weight:600">Godin:</span> "Marketing adalah seni hadir dalam hidup seseorang dengan izin mereka."</div>
+          <div style="font-size:13px;color:var(--muted);padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.06)"><span style="color:var(--text);font-weight:600">GaryVee:</span> "Stop selling. Start helping. Attention adalah mata wang."</div>
+          <div style="font-size:13px;color:var(--muted);padding:8px 0"><span style="color:var(--text);font-weight:600">Patel:</span> "Optimise untuk revenue, bukan sekadar conversion."</div>
+          <div style="font-size:13px;color:var(--muted);padding:8px 0"><span style="color:var(--text);font-weight:600">Kotler:</span> "Produk yang bagus menjual dirinya sendiri."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MY STACK FUNNEL ===== -->
+<div class="page" id="page-mystack">
+  <div class="container">
+    <div class="section-title">My Stack Funnel</div>
+    <div class="section-sub">5 peringkat funnel automation menggunakan tools anda sendiri — Brevo, WordPress Elementor, Vibe Coding, Make.com & Abatablaster.xyz</div>
+
+    <div class="stage-nav" id="stage-nav"></div>
+
+    <div id="stage-content"></div>
+
+    <!-- Funnel Overview Sidebar -->
+    <div style="margin-top:24px">
+      <div class="card">
+        <div class="card-label">Funnel Performance Overview</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px">
+          <div>
+            <div id="funnel-bars-mini"></div>
+          </div>
+          <div class="grid2" id="active-kpis" style="align-content:start;gap:10px"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== EXPERTS ===== -->
+<div class="page" id="page-experts">
+  <div class="container">
+    <div class="section-title">6 Pakar Marketing Bertaraf Dunia</div>
+    <div class="section-sub">Framework, falsafah, dan insight mendalam dari tokoh-tokoh yang membentuk digital marketing moden</div>
+
+    <div class="expert-tabs" id="expert-tabs"></div>
+    <div id="expert-content"></div>
+  </div>
+</div>
+
+<!-- ===== CHEAT SHEET ===== -->
+<div class="page" id="page-cheatsheet">
+  <div class="container">
+    <div class="section-title">Cheat Sheet & Rujukan Pantas</div>
+    <div class="section-sub">Benchmark, KPI targets, automation triggers, dan formula yang perlu anda hafal</div>
+
+    <div class="grid2" style="gap:16px;margin-bottom:16px">
+      <div class="card">
+        <div class="card-label">KPI Benchmark Industri</div>
+        <div class="cheat-row" style="grid-template-columns:1fr 1fr 1fr;font-size:11px;font-weight:700;color:var(--muted)"><div>METRIK</div><div>AVERAGE</div><div>GOOD</div></div>
+        <div class="cheat-row"><div class="cheat-label">Email Open Rate</div><div class="cheat-val">20–25%</div><div class="cheat-val" style="color:var(--green)">30%+</div></div>
+        <div class="cheat-row"><div class="cheat-label">Email Click Rate</div><div class="cheat-val">2–3%</div><div class="cheat-val" style="color:var(--green)">5%+</div></div>
+        <div class="cheat-row"><div class="cheat-label">Landing Page Conv.</div><div class="cheat-val">2–5%</div><div class="cheat-val" style="color:var(--green)">10%+</div></div>
+        <div class="cheat-row"><div class="cheat-label">Sales Page Conv.</div><div class="cheat-val">1–3%</div><div class="cheat-val" style="color:var(--green)">5%+</div></div>
+        <div class="cheat-row"><div class="cheat-label">Opt-in Rate</div><div class="cheat-val">20–30%</div><div class="cheat-val" style="color:var(--green)">40%+</div></div>
+        <div class="cheat-row"><div class="cheat-label">Unsubscribe Rate</div><div class="cheat-val">&lt;0.5%</div><div class="cheat-val" style="color:var(--green)">&lt;0.2%</div></div>
+        <div class="cheat-row"><div class="cheat-label">Cart Abandon Rate</div><div class="cheat-val">70%</div><div class="cheat-val" style="color:var(--green)">&lt;50%</div></div>
+        <div class="cheat-row"><div class="cheat-label">Repeat Purchase</div><div class="cheat-val">20–30%</div><div class="cheat-val" style="color:var(--green)">40%+</div></div>
+      </div>
+      <div class="card">
+        <div class="card-label">Make.com — Automation Wajib Setup</div>
+        <div class="auto-row"><span class="tag tag-trigger">Trigger</span><span class="auto-text">Lead isi form WordPress</span><span class="arrow">→</span><span class="tag tag-action">Tambah ke Brevo List + Tag</span></div>
+        <div class="auto-row"><span class="tag tag-trigger">Trigger</span><span class="auto-text">Payment berjaya</span><span class="arrow">→</span><span class="tag tag-action">Tag 'buyer' + Hantar akses</span></div>
+        <div class="auto-row"><span class="tag tag-trigger">Trigger</span><span class="auto-text">Email dibuka 3x</span><span class="arrow">→</span><span class="tag tag-action">Move ke 'hot lead' segment</span></div>
+        <div class="auto-row"><span class="tag tag-trigger">Trigger</span><span class="auto-text">Tak beli selepas 7 hari</span><span class="arrow">→</span><span class="tag tag-action">Trigger retargeting sequence</span></div>
+        <div class="auto-row"><span class="tag tag-trigger">Trigger</span><span class="auto-text">30 hari selepas beli</span><span class="arrow">→</span><span class="tag tag-action">Hantar upsell offer</span></div>
+        <div class="auto-row"><span class="tag tag-trigger">Trigger</span><span class="auto-text">2 minggu tak engage</span><span class="arrow">→</span><span class="tag tag-action">Win-back campaign</span></div>
+        <div class="auto-row"><span class="tag tag-trigger">Trigger</span><span class="auto-text">Klik link sales page</span><span class="arrow">→</span><span class="tag tag-action">Notify anda via Telegram</span></div>
+        <div class="auto-row"><span class="tag tag-trigger">Trigger</span><span class="auto-text">New buyer masuk</span><span class="arrow">→</span><span class="tag tag-action">Keluarkan dari prospect list</span></div>
+      </div>
+    </div>
+
+    <div class="grid2" style="gap:16px;margin-bottom:16px">
+      <div class="card">
+        <div class="card-label">Brunson — Value Ladder Formula</div>
+        <div class="flow-step"><div class="step-num" style="background:#533AB7">1</div><div><div class="step-title">Lead Magnet (RM0)</div><div class="step-desc">Ebook, checklist, mini-course percuma. Tujuan: dapat email.</div></div></div>
+        <div class="flow-step"><div class="step-num" style="background:#533AB7">2</div><div><div class="step-title">Tripwire (RM19–RM49)</div><div class="step-desc">Produk entry-level. Tukar prospect jadi buyer pertama kali.</div></div></div>
+        <div class="flow-step"><div class="step-num" style="background:#533AB7">3</div><div><div class="step-title">Core Offer (RM197–RM497)</div><div class="step-desc">Produk/kursus utama anda. Deliver transformasi penuh.</div></div></div>
+        <div class="flow-step"><div class="step-num" style="background:#533AB7">4</div><div><div class="step-title">Profit Maximizer (RM997+)</div><div class="step-desc">Coaching, mastermind, done-for-you. Ini tempat profit sebenar.</div></div></div>
+      </div>
+      <div class="card">
+        <div class="card-label">Brevo — Email Sequence Template</div>
+        <div class="auto-row"><span style="min-width:50px;font-size:12px;font-weight:700;color:var(--gold)">Hari 0</span><span class="auto-text">Welcome email + deliver lead magnet</span></div>
+        <div class="auto-row"><span style="min-width:50px;font-size:12px;font-weight:700;color:var(--gold)">Hari 1</span><span class="auto-text">Story email — siapa anda, kenapa anda buat ini</span></div>
+        <div class="auto-row"><span style="min-width:50px;font-size:12px;font-weight:700;color:var(--gold)">Hari 2</span><span class="auto-text">Value email #1 — tip/teknik terbaik anda</span></div>
+        <div class="auto-row"><span style="min-width:50px;font-size:12px;font-weight:700;color:var(--gold)">Hari 3</span><span class="auto-text">Value email #2 — selesaikan masalah utama</span></div>
+        <div class="auto-row"><span style="min-width:50px;font-size:12px;font-weight:700;color:var(--gold)">Hari 4</span><span class="auto-text">Soft sell — perkenalkan produk, bukan hard sell</span></div>
+        <div class="auto-row"><span style="min-width:50px;font-size:12px;font-weight:700;color:var(--gold)">Hari 5</span><span class="auto-text">Testimonial / proof email</span></div>
+        <div class="auto-row"><span style="min-width:50px;font-size:12px;font-weight:700;color:var(--gold)">Hari 6</span><span class="auto-text">Hard sell + urgency (limited time/bonus)</span></div>
+        <div class="auto-row"><span style="min-width:50px;font-size:12px;font-weight:700;color:var(--gold)">Hari 7</span><span class="auto-text">Last call — deadline email (paling tinggi CR)</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Comparison — Tools Stack vs Pakar Framework</div>
+      <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;font-size:13px">
+          <thead>
+            <tr style="border-bottom:1px solid var(--border)">
+              <th style="text-align:left;padding:10px 12px;color:var(--muted);font-weight:600">Peringkat Funnel</th>
+              <th style="text-align:left;padding:10px 12px;color:var(--muted);font-weight:600">Tool Anda</th>
+              <th style="text-align:left;padding:10px 12px;color:var(--muted);font-weight:600">Framework Brunson</th>
+              <th style="text-align:left;padding:10px 12px;color:var(--muted);font-weight:600">Framework Deiss (CVJ)</th>
+              <th style="text-align:left;padding:10px 12px;color:var(--muted);font-weight:600">Taktik GaryVee</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:10px 12px;font-weight:600;color:var(--accent)">Awareness</td>
+              <td style="padding:10px 12px;color:var(--muted)">Elementor / Vibe Coding Landing Page</td>
+              <td style="padding:10px 12px;color:var(--muted)">Bait / Lead Magnet</td>
+              <td style="padding:10px 12px;color:var(--muted)">Aware + Engage</td>
+              <td style="padding:10px 12px;color:var(--muted)">Jab #1 — Educate</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:10px 12px;font-weight:600;color:var(--teal)">Interest</td>
+              <td style="padding:10px 12px;color:var(--muted)">Brevo Sequence + Abatablaster</td>
+              <td style="padding:10px 12px;color:var(--muted)">Soap Opera Sequence</td>
+              <td style="padding:10px 12px;color:var(--muted)">Subscribe + Excite</td>
+              <td style="padding:10px 12px;color:var(--muted)">Jab #2 + Jab #3</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:10px 12px;font-weight:600;color:var(--coral)">Decision</td>
+              <td style="padding:10px 12px;color:var(--muted)">Vibe Coding Sales Page + Brevo Segment</td>
+              <td style="padding:10px 12px;color:var(--muted)">Hook, Story, Offer</td>
+              <td style="padding:10px 12px;color:var(--muted)">Convert</td>
+              <td style="padding:10px 12px;color:var(--muted)">Right Hook — Ask</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:10px 12px;font-weight:600;color:var(--blue)">Purchase</td>
+              <td style="padding:10px 12px;color:var(--muted)">Make.com Webhook + Brevo Transactional</td>
+              <td style="padding:10px 12px;color:var(--muted)">Tripwire → Core Offer</td>
+              <td style="padding:10px 12px;color:var(--muted)">Convert + Excite</td>
+              <td style="padding:10px 12px;color:var(--muted)">Context is King</td>
+            </tr>
+            <tr>
+              <td style="padding:10px 12px;font-weight:600;color:var(--gold)">Retention</td>
+              <td style="padding:10px 12px;color:var(--muted)">Brevo Buyer Sequence + Abatablaster</td>
+              <td style="padding:10px 12px;color:var(--muted)">Profit Maximizer + Return Path</td>
+              <td style="padding:10px 12px;color:var(--muted)">Ascend → Advocate → Promote</td>
+              <td style="padding:10px 12px;color:var(--muted)">Long Game — 51 jabs</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== GLOSSARY ===== -->
+<div class="page" id="page-glossary">
+  <div class="container">
+    <div class="section-title">Glosari Digital Marketing</div>
+    <div class="section-sub">Definisi istilah penting yang anda perlu faham sebagai digital marketer</div>
+    <div class="grid2" style="gap:16px;align-items:start">
+      <div class="card" id="gloss-col1"></div>
+      <div class="card" id="gloss-col2"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ========== DATA ==========
+
+const stages = [
+  {
+    id: 0, name: "Awareness", emoji: "🎯", color: "#7c6ff7",
+    tagline: "Tarik perhatian prospek baru",
+    flow: [
+      { t:"Traffic datang dari ads / content / SEO", s:"Facebook Ads, Google Ads, TikTok Ads, atau organik" },
+      { t:"Landing di Sales Page (Elementor/Vibe Coding)", s:"Satu tujuan sahaja: capture lead atau drive ke offer" },
+      { t:"Lead capture form aktif di WordPress", s:"Form terhubung ke Brevo via Make.com webhook" },
+      { t:"Prospek masuk ke email list", s:"Trigger welcome sequence automatik dalam Brevo" }
+    ],
+    tools: [
+      { n:"WordPress Elementor", c:"#7c6ff7" }, { n:"Vibe Coding Salespage", c:"#7c6ff7" },
+      { n:"Make.com", c:"#9b90f5" }, { n:"Brevo", c:"#b8b0f5" }, { n:"Facebook/Google Ads", c:"#6560b8" }
+    ],
+    autos: [
+      { tr:"Visitor isi form", ac:"Tambah ke Brevo list" },
+      { tr:"New lead masuk", ac:"Tag: 'awareness-cold'" },
+      { tr:"UTM source tracked", ac:"Segment by traffic source" }
+    ],
+    kpis: [{ v:"CPL", l:"Cost Per Lead" },{ v:"CTR", l:"Click-Through Rate" },{ v:"CR%", l:"Landing Page Conv." },{ v:"Reach", l:"Total Reach" }]
+  },
+  {
+    id: 1, name: "Interest", emoji: "💡", color: "#0d7f6e",
+    tagline: "Nurture lead dengan email sequence",
+    flow: [
+      { t:"Lead masuk Brevo — trigger welcome email serta-merta", s:"'Golden window' — engagement paling tinggi dalam 1 jam pertama" },
+      { t:"Email sequence 5–7 hari (value content)", s:"Brevo automation workflow: story → value → soft sell → hard sell" },
+      { t:"Segment berdasarkan behavior (buka email, klik link)", s:"Tag otomatik via Make.com berdasarkan aksi prospek" },
+      { t:"Abatablaster.xyz untuk blast promo/info besar", s:"Blast ke list yang lebih besar, lebih pantas untuk time-sensitive offer" }
+    ],
+    tools: [
+      { n:"Brevo Email Automation", c:"#0d7f6e" }, { n:"Abatablaster.xyz", c:"#0d9e8a" },
+      { n:"Make.com", c:"#2a7a3b" }, { n:"WordPress Blog", c:"#5aab6e" }
+    ],
+    autos: [
+      { tr:"Lead opt-in", ac:"Hantar welcome email dalam 5 minit" },
+      { tr:"Email dibuka 2x", ac:"Tag: 'engaged'" },
+      { tr:"Link diklik", ac:"Move ke 'warm lead' list" }
+    ],
+    kpis: [{ v:"OR%", l:"Open Rate" },{ v:"CTR", l:"Email Click Rate" },{ v:"Unsub", l:"Unsubscribe Rate" },{ v:"Score", l:"Lead Score" }]
+  },
+  {
+    id: 2, name: "Decision", emoji: "🔥", color: "#c96442",
+    tagline: "Bawa hot lead ke sales page utama",
+    flow: [
+      { t:"Segment 'hot lead' dapat email promo terus", s:"Brevo filter: tag 'engaged' + buka email 3x atau lebih" },
+      { t:"Lead klik ke Sales Page (Vibe Coding)", s:"Salespage lengkap: VSL, testimonial, bonus, countdown timer" },
+      { t:"Retargeting ads kepada yang visit tapi belum beli", s:"Facebook Pixel + Google Tag Manager di WordPress" },
+      { t:"Make.com notify anda bila hot lead aktif", s:"Telegram/WhatsApp alert untuk manual follow-up jika perlu" }
+    ],
+    tools: [
+      { n:"Vibe Coding Salespage", c:"#c96442" }, { n:"Brevo Segments", c:"#c94040" },
+      { n:"Abatablaster.xyz", c:"#a0620a" }, { n:"Make.com", c:"#8a5230" }
+    ],
+    autos: [
+      { tr:"Klik link sales page", ac:"Tag: 'sales-page-visitor'" },
+      { tr:"Buka email 3x tanpa beli", ac:"Trigger special bonus offer" },
+      { tr:"Tak buka 5 hari", ac:"Re-engage blast via Abatablaster" }
+    ],
+    kpis: [{ v:"SPV", l:"Sales Page Views" },{ v:"TOS", l:"Time On Page" },{ v:"AOV", l:"Avg Order Value" },{ v:"CR%", l:"Conversion Rate" }]
+  },
+  {
+    id: 3, name: "Purchase", emoji: "💳", color: "#1a5fa8",
+    tagline: "Close sale & onboard pelanggan baru",
+    flow: [
+      { t:"Lead klik butang beli / checkout", s:"Minimumkan friction — kurangkan bilangan klik" },
+      { t:"Make.com webhook trigger post-purchase flow", s:"Payment gateway → Make.com → Brevo + sistem lain serentak" },
+      { t:"Hantar receipt + welcome buyer email automatik", s:"Brevo transactional email: receipt, akses produk, onboarding" },
+      { t:"Keluarkan dari prospect list, masuk buyer list", s:"Elak hantar email promo kepada orang yang dah beli" }
+    ],
+    tools: [
+      { n:"Make.com Webhook", c:"#1a5fa8" }, { n:"Brevo Transactional", c:"#2878cc" },
+      { n:"WordPress/WooCommerce", c:"#4a90d9" }, { n:"Payment Gateway", c:"#6aaae0" }
+    ],
+    autos: [
+      { tr:"Payment berjaya", ac:"Tag 'buyer' + remove dari prospect" },
+      { tr:"New buyer", ac:"Hantar akses produk dalam 5 minit" },
+      { tr:"Purchase event", ac:"Start post-purchase email sequence" }
+    ],
+    kpis: [{ v:"Rev", l:"Total Revenue" },{ v:"Conv", l:"Checkout Conv%" },{ v:"Ref%", l:"Refund Rate" },{ v:"LTV", l:"Lifetime Value" }]
+  },
+  {
+    id: 4, name: "Retention", emoji: "🔁", color: "#a0620a",
+    tagline: "Ubah buyer jadi pelanggan setia & promoter",
+    flow: [
+      { t:"Post-purchase email sequence 7–14 hari", s:"Tips guna produk, value tambahan, bina trust lebih dalam" },
+      { t:"Blast promo produk baru ke buyer list sahaja", s:"Abatablaster + Brevo segment 'buyers' — bukan semua list" },
+      { t:"Upsell ke produk premium / coaching", s:"Bila buyer dah nampak hasil, mereka lebih senang upgrade" },
+      { t:"Referral / affiliate program", s:"Galak buyer yang puas hati untuk share dan dapat komisyen" }
+    ],
+    tools: [
+      { n:"Brevo Buyer Sequence", c:"#a0620a" }, { n:"Abatablaster.xyz", c:"#c48a20" },
+      { n:"Make.com", c:"#8a6020" }, { n:"WordPress Members", c:"#b89050" }
+    ],
+    autos: [
+      { tr:"30 hari selepas beli", ac:"Hantar upsell offer" },
+      { tr:"Tak buka email 2 minggu", ac:"Win-back campaign" },
+      { tr:"2nd purchase berjaya", ac:"Tag: 'VIP customer'" }
+    ],
+    kpis: [{ v:"RPR", l:"Repeat Purchase Rate" },{ v:"LTV", l:"Lifetime Value" },{ v:"NPS", l:"Satisfaction Score" },{ v:"Ref%", l:"Referral Rate" }]
+  }
+];
+
+const experts = [
+  {
+    name:"Russell Brunson", role:"Co-Founder ClickFunnels — Raja Funnel Internet",
+    color:"#7c6ff7", textColor:"#ffffff",
+    framework:"Value Ladder + Hook, Story, Offer",
+    desc:"Brunson percaya setiap bisnes perlu 'Value Ladder' — tangga nilai yang membawa pelanggan dari percuma ke premium. Funnel bukan sekadar page, ia adalah perjalanan psikologi yang direka dengan teliti.",
+    quote:"Ultimately, the business that can spend the most to acquire a customer wins. Your funnel determines how much you can spend.",
+    steps:[
+      { n:"1", t:"Lead Magnet (Bait)", s:"Beri sesuatu percuma/murah — ebook, checklist, free trial. Tujuan: ambil email." },
+      { n:"2", t:"Tripwire Offer", s:"Produk murah untuk tukar prospect jadi buyer. Psikologi: sekali bayar, lebih mudah bayar lagi." },
+      { n:"3", t:"Core Offer", s:"Produk utama. Ini masa buyer dah trust anda. Deliver transformasi sebenar." },
+      { n:"4", t:"Profit Maximizer", s:"Upsell, downsell, cross-sell. Ini tempat keuntungan sebenar dihasilkan." },
+      { n:"5", t:"Return Path", s:"Email sequence, subscription, community — bawa mereka balik berkali-kali." }
+    ],
+    insights:[
+      { k:"Hook", v:"Setiap komunikasi perlu HOOK yang grab attention dalam 3 saat pertama — headline, subject line, opening line." },
+      { k:"Story", v:"Cerita membina trust lebih pantas dari fakta. Guna Soap Opera Sequence dalam email nurture." },
+      { k:"Offer", v:"Offer bukan produk — offer adalah transformasi yang pelanggan dapat. Jual hasil, bukan features." },
+      { k:"Traffic Temperature", v:"Cold → Warm → Hot. Jangan offer produk mahal kepada cold traffic yang belum kenal anda." }
+    ],
+    tags:["Value Ladder","Hook Story Offer","Soap Opera Email","Tripwire","OTO Upsell","Dotcom Secrets"]
+  },
+  {
+    name:"Ryan Deiss", role:"Founder DigitalMarketer.com — Pencipta Customer Value Journey",
+    color:"#0d7f6e", textColor:"#ffffff",
+    framework:"Customer Value Journey (CVJ) — 8 Peringkat",
+    desc:"Deiss mengajar bahawa funnel bukan satu laluan linear. Ia adalah perjalanan 8 peringkat yang perlu dioptimize di setiap titik seperti lini pengeluaran kilang — satu bottleneck boleh rosakkan keseluruhan sistem.",
+    quote:"A funnel is not a marketing tactic. It's a system for turning strangers into super fans — and super fans into your salesforce.",
+    steps:[
+      { n:"1", t:"Aware", s:"Prospek tahu anda wujud. Traffic, ads, content, SEO, word of mouth." },
+      { n:"2", t:"Engage", s:"Mereka berinteraksi — baca blog, tengok video, follow sosial media." },
+      { n:"3", t:"Subscribe", s:"Berikan email/nombor. Titik paling kritikal — anda kini boleh follow up." },
+      { n:"4", t:"Convert", s:"Beli pertama kali — walaupun kecil. Tukar prospect jadi customer." },
+      { n:"5", t:"Excite", s:"Deliver beyond expectations. WOW mereka. Elak refund dan bina loyalty." },
+      { n:"6", t:"Ascend", s:"Naik ke offer lebih tinggi — upsell, premium plan, coaching." },
+      { n:"7", t:"Advocate", s:"Mereka mula defend dan recommend bisnes anda secara organik." },
+      { n:"8", t:"Promote", s:"Aktif promote anda — affiliate, referral, testimonial. Jadi sales team percuma." }
+    ],
+    insights:[
+      { k:"CVO", v:"Customer Value Optimization: maksimumkan nilai setiap pelanggan, bukan hanya cari pelanggan baru." },
+      { k:"Before & After Grid", v:"Fikirkan 'Before State' dan 'After State' pelanggan — jual transformasi, bukan produk." },
+      { k:"Assembly Line", v:"Optimize setiap peringkat CVJ macam kilang — identify bottleneck dan fix satu-satu." },
+      { k:"The Promoter", v:"Matlamat akhir adalah jadikan pelanggan 'Promoter' yang promot bisnes anda secara percuma dan sukarela." }
+    ],
+    tags:["CVJ 8-Stage","CVO","Before & After","Ascension","Promoter Engine","Digital Marketer"]
+  },
+  {
+    name:"Seth Godin", role:"Author Purple Cow & Permission Marketing — Ahli Falsafah Marketing",
+    color:"#c96442", textColor:"#ffffff",
+    framework:"Permission Marketing + Tribe Building",
+    desc:"Godin ajar bahawa marketing bukan tentang menjerit lebih kuat — ia tentang mendapat izin dan menjadi luar biasa. Funnel terbaik adalah yang orang nak masuk sendiri kerana anda dan produk anda remarkable.",
+    quote:"Marketing is no longer about the stuff you make, but about the stories you tell. Earn attention, don't demand it.",
+    steps:[
+      { n:"1", t:"Be Remarkable (Purple Cow)", s:"Produk/perkhidmatan anda perlu luar biasa. Kalau biasa-biasa, tiada funnel yang boleh selamatkan." },
+      { n:"2", t:"Find Your Tribe", s:"Jangan reach semua orang. Cari 'minimum viable audience' — sekumpulan kecil yang akan obsess dengan anda." },
+      { n:"3", t:"Earn Permission", s:"Dapat izin untuk teruskan komunikasi. Email opt-in adalah izin paling berharga dalam digital marketing." },
+      { n:"4", t:"Deliver Anticipated Value", s:"Hantar sesuatu yang DIJANGKA, PERSONAL, dan RELEVAN — bukan blast generik yang mengganggu." },
+      { n:"5", t:"Build Trust Over Time", s:"Trust tidak dibeli — ia dibina. Konsisten deliver value. Funnel berjaya bila trust wujud sebelum offer." }
+    ],
+    insights:[
+      { k:"Minimum Viable Audience", v:"1,000 true fans lebih berharga dari 1 juta follower pasif. Fokus pada depth, bukan breadth." },
+      { k:"Interruption vs Permission", v:"Iklan lama interrupt orang. Marketing moden earn permission dulu, baru approach dengan offer." },
+      { k:"Idea Virus", v:"Idea terbaik menyebar sendiri. Bina produk yang worth talking about — word of mouth adalah funnel terbaik." },
+      { k:"Empathy First", v:"Tanya: 'Apa yang pelanggan saya nak rasa?' — bukan 'Macam mana nak jual lebih banyak?'" }
+    ],
+    tags:["Permission Marketing","Tribe","Purple Cow","Empathy","Minimum Viable Audience","Idea Virus"]
+  },
+  {
+    name:"Gary Vaynerchuk", role:"CEO VaynerMedia — Master of Attention & Content",
+    color:"#1a5fa8", textColor:"#ffffff",
+    framework:"Jab, Jab, Jab, Right Hook — Content-First Funnel",
+    desc:"GaryVee ajar bahawa funnel moden bermula dengan content. Beri value berkali-kali sebelum minta sesuatu. Context dan platform sama pentingnya dengan content — same message, different packaging.",
+    quote:"Stop selling. Start helping. The best marketing strategy ever? Care. Attention is a currency — and most brands are broke.",
+    steps:[
+      { n:"1", t:"Jab #1 — Educate", s:"Content yang ajar sesuatu bernilai. Blog, video, podcast. Tiada CTA. Pure value." },
+      { n:"2", t:"Jab #2 — Entertain", s:"Content yang menghibur, relatable, atau viral. Bina emotional connection dengan audience." },
+      { n:"3", t:"Jab #3 — Inspire", s:"Story, testimonial, behind-the-scenes. Buat mereka rasa sesuatu yang mendalam." },
+      { n:"4", t:"Right Hook — Ask", s:"Sekarang baru boleh minta — beli, sign up, share. Selepas 3 jab, baru 1 ask." },
+      { n:"5", t:"Contextual Content", s:"Same story, different format tiap platform. Instagram ≠ LinkedIn ≠ TikTok ≠ Email." }
+    ],
+    insights:[
+      { k:"Attention Economy", v:"Perhatian manusia adalah aset paling berharga. Hadir di mana-mana mata orang berada — Instagram, TikTok, YouTube." },
+      { k:"Document Don't Create", v:"Jangan tunggu perfect. Document journey anda — authenticity lebih powerful dari production value yang tinggi." },
+      { k:"Platform Native", v:"Content yang sama tidak work di semua platform. Adapt format, tone, dan style untuk setiap ekosistem." },
+      { k:"Long Game", v:"GaryVee sangat sabar. Bina relationship bertahun sebelum expect return. 51 jabs bukan 3." }
+    ],
+    tags:["Jab Right Hook","Content First","Attention Economy","Platform Native","Authentic Story","Document"]
+  },
+  {
+    name:"Neil Patel", role:"Co-Founder NP Digital & Ubersuggest — King of Data-Driven Growth",
+    color:"#a0620a", textColor:"#ffffff",
+    framework:"SEO-Led Content Funnel + CRO Loop",
+    desc:"Patel percaya funnel terbaik bermula dari organic search. Attract dengan content, nurture dengan email, convert dengan CRO. Semua keputusan berasaskan data — A/B test everything, optimize berdasarkan nombor sebenar.",
+    quote:"Don't optimize for conversions — optimize for revenue. Data tells you what happened. Good marketing judgment tells you why.",
+    steps:[
+      { n:"1", t:"TOFU — SEO Content", s:"Blog post, video yang answer soalan prospek. Rank di Google = traffic percuma forever." },
+      { n:"2", t:"Lead Magnet & Capture", s:"Content upgrade, free tool, checklist. Convert reader jadi lead. Target opt-in rate >5%." },
+      { n:"3", t:"Email Nurture Sequence", s:"Automated sequence 7–14 email berdasarkan behavior. Open rate dan click rate tentukan next email." },
+      { n:"4", t:"Retargeting Loop", s:"Pixel semua visitor. Retarget yang belum convert dengan ads. Cost jauh lebih murah dari cold traffic." },
+      { n:"5", t:"CRO — Conversion Rate Optimisation", s:"A/B test every element — headline, CTA, warna, layout. Data decide, bukan perasaan." },
+      { n:"6", t:"Analyse & Scale", s:"Identify top-performing funnel → double down. Kill underperforming campaigns tanpa sentimen." }
+    ],
+    insights:[
+      { k:"Compounding Traffic", v:"Content SEO adalah aset jangka panjang. Post tahun lalu masih boleh dapat ribuan traffic hari ini." },
+      { k:"Omnipresence", v:"Hadir di semua channel — Google, YouTube, Email, Facebook, LinkedIn. Prospect nampak anda di mana-mana." },
+      { k:"CRO First", v:"Double conversion rate = double revenue tanpa tambah budget ads. Ini lever paling powerful dan paling diabaikan." },
+      { k:"Skyscraper Technique", v:"Cari content competitor yang rank tinggi. Buat versi 10x lebih baik. Kemudian outrank mereka." }
+    ],
+    tags:["SEO-Led Funnel","CRO","Data Driven","Retargeting","Omnipresence","A/B Testing","Skyscraper"]
+  },
+  {
+    name:"Philip Kotler", role:"Father of Modern Marketing — Bapa Marketing Moden",
+    color:"#2a7a3b", textColor:"#ffffff",
+    framework:"Marketing 5.0 — Human-Centric Digital Funnel (5A)",
+    desc:"Kotler, Father of Marketing, evolve funnel dari 4P tradisional kepada Marketing 5.0 — gabungan teknologi dan humanity. Funnel mesti serve manusia, bukan sekadar convert numbers.",
+    quote:"The best advertising is done by satisfied customers. Marketing is the art of creating genuine customer value — not finding clever ways to sell.",
+    steps:[
+      { n:"1", t:"Aware (Attract)", s:"Brand perlu jadi 'share of mind' dulu. Content, PR, influencer, SEO, word of mouth." },
+      { n:"2", t:"Appeal (Engage)", s:"Buat prospek tertarik dengan brand values yang relevan dengan identity dan aspirasi mereka." },
+      { n:"3", t:"Ask (Research)", s:"Prospek research sendiri — review, comparison, testimonial. Facilitate proses ini dengan content proof." },
+      { n:"4", t:"Act (Convert)", s:"Buat proses pembelian semudah mungkin. Kurangkan friction. Setiap klik tambahan = kehilangan prospect." },
+      { n:"5", t:"Advocate (Retain)", s:"Post-purchase experience adalah marketing terbaik. Happy customer = walking advertisement yang tak perlu bayar." }
+    ],
+    insights:[
+      { k:"Marketing 5.0", v:"Teknologi (AI, Big Data) perlu serve humanity. Automation untuk efficiency, human touch untuk empathy." },
+      { k:"5A Framework", v:"Non-linear — orang boleh skip atau loop balik ke mana-mana peringkat. Map perjalanan sebenar pelanggan anda." },
+      { k:"Purpose-Driven", v:"Brand yang ada 'why' yang kuat convert lebih baik. Gen Z dan Millennial beli dari brand yang mereka believe in." },
+      { k:"Customer Centricity", v:"Semua keputusan bermula dari pelanggan, bukan produk. Faham deep needs, bukan surface wants." }
+    ],
+    tags:["Marketing 5.0","5A Framework","Human Centric","Purpose Driven","Customer Journey","4P Evolution"]
+  }
+];
+
+const glossary = [
+  { t:"Funnel", d:"Perjalanan prospek dari tidak kenal brand anda hingga jadi pelanggan setia. Berbentuk seperti corong — ramai masuk, lebih sedikit yang convert di setiap peringkat." },
+  { t:"Lead", d:"Seseorang yang menunjukkan minat terhadap produk/perkhidmatan anda, biasanya dengan memberikan email atau nombor telefon mereka." },
+  { t:"Lead Magnet", d:"Sesuatu bernilai yang anda beri percuma (ebook, checklist, webinar) sebagai pertukaran untuk maklumat kontak prospek." },
+  { t:"Opt-in Rate", d:"Peratusan pengunjung yang memberikan email mereka. Formula: (bilangan opt-in ÷ jumlah pengunjung) × 100." },
+  { t:"Open Rate", d:"Peratusan penerima email yang membuka email anda. Benchmark industri: 20–25%. Good: 30%+." },
+  { t:"Click-Through Rate (CTR)", d:"Peratusan orang yang klik link dalam email atau iklan. Email CTR benchmark: 2–3%. Good: 5%+." },
+  { t:"Conversion Rate", d:"Peratusan pengunjung/lead yang melakukan tindakan yang diinginkan (beli, daftar, isi form)." },
+  { t:"Tripwire", d:"Produk murah (RM19–RM49) yang dijual kepada prospek baru untuk menukar mereka jadi buyer pertama kali. Strategi Russell Brunson." },
+  { t:"Upsell", d:"Offer produk yang lebih mahal/premium kepada pelanggan semasa atau selepas mereka beli produk pertama." },
+  { t:"Downsell", d:"Bila pelanggan tolak upsell, offer versi lebih murah/basic. Elak kehilangan pelanggan sepenuhnya." },
+  { t:"Value Ladder", d:"Rangka kerja Brunson — susun produk dari percuma → murah → sederhana → premium. Bawa pelanggan naik tangga nilai." },
+  { t:"Automation Workflow", d:"Siri tindakan yang berlaku secara automatik apabila sesuatu trigger berlaku (contoh: email dihantar apabila seseorang opt-in)." },
+  { t:"Segmentation", d:"Membahagikan email list kepada kumpulan berdasarkan ciri-ciri tertentu (perilaku, demografi, tahap dalam funnel)." },
+  { t:"Tagging", d:"Label yang diberikan kepada lead/pelanggan dalam email platform (Brevo) berdasarkan tindakan mereka. Membolehkan automation lebih tepat." },
+  { t:"Webhook", d:"Mekanisme Make.com untuk menghubungkan dua sistem secara real-time. Contoh: payment berjaya → trigger email automatik." },
+  { t:"Customer Lifetime Value (LTV)", d:"Jumlah keseluruhan wang yang seorang pelanggan belanjakan dengan bisnes anda sepanjang hayat hubungan mereka." },
+  { t:"TOFU / MOFU / BOFU", d:"Top of Funnel (awareness), Middle of Funnel (consideration), Bottom of Funnel (decision). Setiap peringkat perlukan content berbeza." },
+  { t:"Retargeting", d:"Iklan yang ditunjukkan kepada orang yang pernah visit website anda tetapi belum beli. Menggunakan Facebook Pixel atau Google Tag." },
+  { t:"A/B Testing", d:"Ujian dua versi (A dan B) untuk sesuatu elemen (headline, butang, gambar) untuk tentukan mana yang perform lebih baik." },
+  { t:"CRO — Conversion Rate Optimisation", d:"Proses sistematik meningkatkan peratusan pengunjung yang melakukan tindakan yang diinginkan di website/salespage anda." }
+];
+
+// ========== RENDER FUNCTIONS ==========
+
+function goPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  const tabs = { home:0, mystack:1, experts:2, cheatsheet:3, glossary:4 };
+  document.querySelectorAll('.nav-tab')[tabs[id]].classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// MY STACK
+let currentStage = 0;
+function initStack() {
+  const nav = document.getElementById('stage-nav');
+  stages.forEach((s,i) => {
+    const btn = document.createElement('button');
+    btn.className = 'stage-btn' + (i===0?' active':'');
+    btn.textContent = s.emoji + ' ' + s.name;
+    btn.style.setProperty('--c', s.color);
+    btn.onclick = () => showStage(i);
+    nav.appendChild(btn);
+  });
+  showStage(0);
+  renderFunnelBars();
+}
+
+function showStage(i) {
+  currentStage = i;
+  document.querySelectorAll('.stage-btn').forEach((b,idx) => {
+    b.classList.toggle('active', idx===i);
+    b.style.background = idx===i ? stages[idx].color : '';
+    b.style.color = idx===i ? '#fff' : '';
+  });
+  const s = stages[i];
+  document.getElementById('stage-content').innerHTML = `
+    <div class="grid2">
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem">
+          <div style="width:10px;height:10px;border-radius:50%;background:${s.color};flex-shrink:0"></div>
+          <div>
+            <div style="font-size:18px;font-weight:700;font-family:'DM Serif Display',serif;color:var(--text)">${s.name}</div>
+            <div style="font-size:13px;color:var(--muted)">${s.tagline}</div>
+          </div>
+        </div>
+        <div class="card-label">Flow & Proses</div>
+        ${s.flow.map((f,n) => `
+          <div class="flow-step">
+            <div class="step-num" style="background:${s.color}">${n+1}</div>
+            <div><div class="step-title">${f.t}</div><div class="step-desc">${f.s}</div></div>
+          </div>
+        `).join('')}
+      </div>
+      <div class="card">
+        <div class="card-label">Tools Yang Digunakan</div>
+        <div style="margin-bottom:1.2rem">${s.tools.map(t=>`<span class="tool-chip"><span class="chip-dot" style="background:${t.c}"></span>${t.n}</span>`).join('')}</div>
+        <div class="card-label">Automation Make.com</div>
+        ${s.autos.map(a=>`
+          <div class="auto-row">
+            <span class="tag tag-trigger">Trigger</span>
+            <span class="auto-text">${a.tr}</span>
+            <span class="arrow">→</span>
+            <span class="tag tag-action">Aksi</span>
+            <span class="auto-text">${a.ac}</span>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+  renderKPIs(i);
+  highlightFunnelBars(i);
+}
+
+function renderFunnelBars() {
+  const colors = stages.map(s=>s.color);
+  const widths = ['100%','80%','58%','35%','18%'];
+  const labels = ['Awareness — 1,000 visitors','Interest — 800 engage','Decision — 450 sales page','Purchase — 180 buyers','Retention — 90 repeat'];
+  document.getElementById('funnel-bars-mini').innerHTML = stages.map((s,i)=>`
+    <div class="funnel-bar-wrap">
+      <div class="funnel-bar fb-bar" data-i="${i}" style="background:${s.color};width:${widths[i]};opacity:${i===0?1:0.45}">${s.emoji} ${labels[i]}</div>
+    </div>
+  `).join('');
+}
+
+function highlightFunnelBars(active) {
+  document.querySelectorAll('.fb-bar').forEach((b,i)=>{
+    b.style.opacity = i===active?'1':'0.35';
+    b.style.fontWeight = i===active?'700':'500';
+  });
+}
+
+function renderKPIs(i) {
+  const s = stages[i];
+  document.getElementById('active-kpis').innerHTML = s.kpis.map(k=>`
+    <div class="kpi-card">
+      <div class="kpi-val" style="color:${s.color}">${k.v}</div>
+      <div class="kpi-label">${k.l}</div>
+    </div>
+  `).join('');
+}
+
+// EXPERTS
+let currentExpert = 0;
+function initExperts() {
+  const tabs = document.getElementById('expert-tabs');
+  experts.forEach((e,i) => {
+    const btn = document.createElement('button');
+    btn.className = 'expert-tab' + (i===0?' active':'');
+    btn.textContent = e.name.split(' ')[0] + ' ' + e.name.split(' ').slice(-1)[0];
+    btn.onclick = () => showExpert(i);
+    tabs.appendChild(btn);
+  });
+  showExpert(0);
+}
+
+function showExpert(i) {
+  currentExpert = i;
+  document.querySelectorAll('.expert-tab').forEach((b,idx) => {
+    b.classList.toggle('active', idx===i);
+    b.style.background = idx===i ? experts[idx].color : '';
+    b.style.color = idx===i ? experts[idx].textColor : '';
+    b.style.borderColor = idx===i ? experts[idx].color : '';
+  });
+  const e = experts[i];
+  const stepsGrid = e.steps.length > 5
+    ? `<div class="grid2">${e.steps.map(s=>`<div class="flow-step"><div class="step-num" style="background:${e.color};color:${e.textColor}">${s.n}</div><div><div class="step-title">${s.t}</div><div class="step-desc">${s.s}</div></div></div>`).join('')}</div>`
+    : e.steps.map(s=>`<div class="flow-step"><div class="step-num" style="background:${e.color};color:${e.textColor}">${s.n}</div><div><div class="step-title">${s.t}</div><div class="step-desc">${s.s}</div></div></div>`).join('');
+
+  document.getElementById('expert-content').innerHTML = `
+    <div class="grid2" style="margin-bottom:14px">
+      <div class="card">
+        <div class="expert-name-big">${e.name}</div>
+        <div class="expert-role">${e.role}</div>
+        <div class="expert-quote">${e.quote}</div>
+        <div style="margin:12px 0 8px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Framework</div>
+        <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px">${e.framework}</div>
+        <div style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:12px">${e.desc}</div>
+        <div>${e.tags.map(t=>`<span class="framework-tag" style="background:rgba(0,0,0,0.05);border:1px solid rgba(0,0,0,0.1);color:var(--text)">${t}</span>`).join('')}</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Peringkat & Langkah</div>
+        ${stepsGrid}
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-label">Key Insights — Yang Wajib Anda Hafal</div>
+      <div class="grid2" style="gap:0">
+        ${e.insights.map(ins=>`<div class="insight-row"><div class="insight-key">${ins.k}</div><div class="insight-val">${ins.v}</div></div>`).join('')}
+      </div>
+    </div>
+  `;
+}
+
+// GLOSSARY
+function initGlossary() {
+  const half = Math.ceil(glossary.length/2);
+  const col1 = glossary.slice(0,half);
+  const col2 = glossary.slice(half);
+  document.getElementById('gloss-col1').innerHTML = '<div class="card-label">A – M</div>' + col1.map(g=>`<div class="gloss-item"><div class="gloss-term">${g.t}</div><div class="gloss-def">${g.d}</div></div>`).join('');
+  document.getElementById('gloss-col2').innerHTML = '<div class="card-label">O – Z</div>' + col2.map(g=>`<div class="gloss-item"><div class="gloss-term">${g.t}</div><div class="gloss-def">${g.d}</div></div>`).join('');
+}
+
+// INIT
+initStack();
+initExperts();
+initGlossary();
+</script>
+</body>
+</html>
